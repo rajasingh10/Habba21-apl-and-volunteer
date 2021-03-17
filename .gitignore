@@ -1,0 +1,7 @@
+node_modules
+package-lock.json
+server/database
+server/.env
+.env
+
+client/node_modules
