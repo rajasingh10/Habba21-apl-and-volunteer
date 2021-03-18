@@ -26,8 +26,8 @@ transform: rotate(60deg);
          padding: 25px;
          border: 1px solid #eee;
          box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-         font-size: 7px;
-         line-height: 11px;
+         font-size: 10px;
+         line-height: 16px;
          font-family: 'Helvetica Neue', 'Helvetica';
          color: #555;
          }
@@ -104,7 +104,7 @@ transform: rotate(60deg);
                   <table>
                      <tr>
                         <td class="title"><img  src=${photo}
-                           style="width:100%; max-width:156px;"></td>
+                           style="width:100%; max-width:156px; max-height:100px"></td>
                         <td>
                         <td>
                         <div id="watermark">
