@@ -35,7 +35,7 @@ app.use('/api' , require('./server/Routes/volunteer'))
 
 
 
-if (process.env.NODE_ENV !== 'development' && app.get('*', (req, res) => {
+if (process.env.NODE_ENV == 'development' && app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 })) {
     console.log('getting files from static build')

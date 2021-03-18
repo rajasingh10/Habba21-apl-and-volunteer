@@ -88,7 +88,7 @@ module.exports = {
                   function (error, results, fields) {
                     res.status(200).json({
                       data: results[0],
-                      message: "New Entry",
+                      message: "Registration Successful",
                     });
                   }
                 );
@@ -100,7 +100,7 @@ module.exports = {
         if (results[0]) {
           res.status(200).json({
             data: results[0],
-            message: "Already Registered",
+            message: "Already Registered contact CPRD for further changes.",
           });
 
           // console.log(error)
@@ -115,27 +115,33 @@ module.exports = {
   },
 
   createPdf: async (req, res, next) => {
-    pdf.create(pdfTemplate(req.body), {}).toFile(`result.pdf`, (err) => {
+    pdf.create( pdfTemplate(req.body), {}).toFile(`result.pdf`, async (err) => {
       if (err) {
         res.send(Promise.reject());
       }
-
-      res.send(Promise.resolve());
+else{
+      
+  await res.send(Promise.resolve());
+  
+  let base64 = "";
+  await pdf2base64(path.join(__dirname, `../../result.pdf`))
+    .then((response) => {
+      base64 = response;
+    })
+    .catch((error) => {
+      console.log(error); //Exepection error....
     });
 
-    let base64 = "";
-    await pdf2base64(path.join(__dirname, `../../result.pdf`))
-      .then((response) => {
-        base64 = response;
-      })
-      .catch((error) => {
-        console.log(error); //Exepection error....
-      });
+  sendMail(req.body, base64);
 
-    sendMail(req.body, base64);
+
+
+}});
+
   },
 
   fetchPdf: async (req, res, next) => {
+    console.log(req.body)
     console.log(req.params.id);
     res.sendFile(path.join(__dirname, `../../result.pdf`));
   },

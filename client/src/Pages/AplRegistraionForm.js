@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
+import {ToastsContainer, ToastsStore} from 'react-toasts';
+ 
 
 const fileToDataUri = (file) =>
   new Promise((resolve, reject) => {
@@ -37,9 +39,11 @@ class AplRegistrationForm extends Component {
 
       this.createAndDownloadPdf(c.data.data);
 
-      if(c.data.data.message = 'Already Registered'){
-        console.log("Already Registered Contact CPRD for further Changes ")
-      }
+   
+
+        ToastsStore.info(c.data.message)
+        console.log(c.data.message)
+  
       // this.setState(data);
     } catch (error) {}
   };
@@ -86,7 +90,7 @@ class AplRegistrationForm extends Component {
           }}
 
 
-          className=" needs-validation" novalidate
+          // className=" needs-validation" noValidate
         >
           <div class="row register-form">
             <div class="col-md-6">
@@ -260,6 +264,7 @@ class AplRegistrationForm extends Component {
             </div>
           </div>
         </form>
+        <ToastsContainer store={ToastsStore} position="top_center" />
       </>
     );
   }

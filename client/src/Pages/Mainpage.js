@@ -17,12 +17,7 @@ const Mainpage = () => {
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Acharya Premier League </h3>
-                                
-                                
-                                       
                                         <AplRegistrationForm/>
-                               
-                            
                             </div>
                             
                         </div>

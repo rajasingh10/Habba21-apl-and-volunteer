@@ -31,11 +31,7 @@ function App() {
         component={Home}
       />
 
-<Route
-        exact
-        path='*'
-        component={Home}
-      />
+
       </Switch>
     </Router>
   );
