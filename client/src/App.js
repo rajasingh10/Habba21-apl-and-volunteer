@@ -18,7 +18,7 @@ function App() {
       <Route
         exact
         path='/APL-Registration'
-        component={AplRegistrationForm}
+        component={Mainpage}
       />
         <Route
         exact
