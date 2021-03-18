@@ -14,14 +14,15 @@ return `
     margin-left:-70px;
     margin-top:-50px;
     transform-origin: 0 0;
-    transform: rotate(60deg);
+    transform: rotate(0deg);
             opacity: 0.2;
             text-align: right;
             color: grey;
           }
 
              .invoice-box {
-             max-width: 800px;
+             max-width: 2480px;
+             max-height: 100vh;
              margin: auto;
              padding: 25px;
              border: 1px solid #eee;
