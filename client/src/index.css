@@ -2,7 +2,7 @@ body{
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
 
-
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 .register{
 /* background-color: #fff; */
 
@@ -101,6 +101,11 @@ body{
   margin-top: 8%;
   margin-bottom: -15%;
   color: #495057;
+  font-weight: 900;
+  
+  font-size: 40px;
+  font-family: 'Lobster', cursive;
+  letter-spacing:1.4px
 }
 
 

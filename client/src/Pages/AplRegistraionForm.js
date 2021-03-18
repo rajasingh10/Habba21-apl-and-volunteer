@@ -36,6 +36,10 @@ class AplRegistrationForm extends Component {
       console.log(c.data.data);
 
       this.createAndDownloadPdf(c.data.data);
+
+      if(c.data.data.message = 'Already Registered'){
+        console.log("Already Registered Contact CPRD for further Changes ")
+      }
       // this.setState(data);
     } catch (error) {}
   };

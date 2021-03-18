@@ -57,11 +57,12 @@ module.exports = {
       async function (error, results, fields) {
         if (error) {
           res.status(400).json({
-            message: "Invalid DATA ",
+            message: "Invalid DATA ",error
           });
+          return
         }
 
-        if (results[0] == null) {
+        if (!results?.length) {
           let query1 = `INSERT INTO apl_players (Name, auid, email, photo , dob , category , college ,year , department  ,gender,type )
         VALUES ("${req.body.name}","${req.body.auid}","${req.body.email}","${req.body.photo}","${req.body.dob}","${req.body.category}","${req.body.college}","${req.body.year}","${req.body.department}","${req.body.gender}","${req.body.type}");`;
 
@@ -73,8 +74,10 @@ module.exports = {
               if (error) {
                 res.status(400).json({
                   message: "Invalid Data",
+                  error
                 });
-                return;
+                console.log(error)
+                return
               }
 
               if (results) {
