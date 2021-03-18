@@ -31,16 +31,21 @@ app.use('/api' , require('./server/Routes/volunteer'))
 
 
 
-//React
 
-
-
-if (process.env.NODE_ENV !== 'development' && app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '../client/build/index.html'));
-})) {
-    console.log('getting files from static build')
-}
-
+//Serve react client app to production
+if (
+    process.env.NODE_ENV === 'staging' ||
+    process.env.NODE_ENV === 'production'
+  ) {
+    app.use(express.static(`${__dirname}/../client/build`));
+  
+    app.use('*', (req, res) => {
+      res.sendFile(
+        path.resolve(__dirname, '..', 'client', 'build', 'index.html')
+      );
+    });
+  }
+  
 //
 
 
