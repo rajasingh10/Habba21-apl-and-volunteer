@@ -25,4 +25,26 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use('/pdf' , require('./server/Routes/pdfCreation'))
 app.use('/api' , require('./server/Routes/volunteer'))
 
+
+
+
+
+
+
+//React
+
+if (env !== 'development' && app.use(express.static(path.join(__dirname, '/client/build')))) {
+    console.log('in client build')
+}
+
+
+if (env !== 'development' && app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+})) {
+    console.log('getting files from static build')
+}
+
+//
+
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
