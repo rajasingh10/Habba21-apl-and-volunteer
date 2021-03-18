@@ -155,12 +155,27 @@ class AplRegistrationForm extends Component {
               </div>
               <div class="form-group">
                 <input
-                  type="date"
+               onFocus={
+                (e)=> {
+                  e.currentTarget.type = "date";
+                  e.currentTarget.focus();
+                 }
+               }
+
+               onBlur={
+                (e)=> {
+                  e.currentTarget.type = "text";
+                  e.currentTarget.blur();
+                 }
+               }
+                type="text"
                   className="form-control"
-                  placeholder="Date of Birth"
+           placeholder="Date of Birth"
                   name="dob"
                   onChange={this.handleChange}
                 />
+
+
               </div>
               <div class="form-group">
               {/* <label htmlFor="category">Choose a category: &nbsp;</label> */}
@@ -170,7 +185,8 @@ class AplRegistrationForm extends Component {
                 name="category"
                 defaultValue='NULL'
                 onChange={(e) => this.setState({ category: e.target.value })}
-              >
+              required
+             >
                   <option value="NULL" disabled>Select Category</option>
                 <option value="Batsman">Batsman</option>
                 <option value="Bowler">Bowler</option>
@@ -178,11 +194,12 @@ class AplRegistrationForm extends Component {
               </select></div>
       
 
-              <div onChange={this.setGender.bind(this)} value={this.state.type}>
+              <div required onChange={this.setGender.bind(this)} value={this.state.type}>
                 <input type="radio" value="M" name="gender" /> Male &nbsp;
                 <input type="radio" value="F" name="gender" /> Female &nbsp;
               </div>
               <div
+               required
                 id="register-type"
                 name="register-type"
                 onChange={this.setType.bind(this)}
@@ -195,6 +212,7 @@ class AplRegistrationForm extends Component {
 
               <input
                 type="file"
+                required
                 id="photo"
                 name="photo"
                 accept="image/png, image/jpeg"
