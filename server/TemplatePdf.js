@@ -32,7 +32,7 @@ transform: rotate(60deg);
          color: #555;
          }
          .margin-top {
-         margin-top: 50px;
+         margin-top: 40px;
          }
          .justify-center {
          text-align: center;
@@ -58,7 +58,7 @@ transform: rotate(60deg);
          color: #333;
          }
          .invoice-box table tr.information table td {
-         padding-bottom: 20px;
+         padding-bottom: 10px;
          }
          .invoice-box table tr.heading td {
          background: #eee;
@@ -66,7 +66,7 @@ transform: rotate(60deg);
          font-weight: bold;
          }
          .invoice-box table tr.details td {
-         padding-bottom: 20px;
+         padding-bottom: 10px;
          }
          .invoice-box table tr.item td {
          border-bottom: 1px solid #eee;
@@ -104,7 +104,7 @@ transform: rotate(60deg);
                   <table>
                      <tr>
                         <td class="title"><img  src=${photo}
-                           style="width:100%; max-height:90px;"></td>
+                           style="width:100%; max-width:55px ;max-height:90px;"></td>
                         <td>
                         <td>
                         <div id="watermark">
