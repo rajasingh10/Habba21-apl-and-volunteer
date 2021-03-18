@@ -104,7 +104,7 @@ transform: rotate(60deg);
                   <table>
                      <tr>
                         <td class="title"><img  src=${photo}
-                           style="width:100%; max-width:156px; max-height:100px"></td>
+                           style="width:100%; max-width:156px; max-height:100px;"></td>
                         <td>
                         <td>
                         <div id="watermark">
