@@ -53,7 +53,7 @@ transform: rotate(60deg);
          padding-bottom: 20px;
          }
          .invoice-box table tr.top table td.title {
-         font-size: 45px;
+         font-size: 30px;
          line-height: 24px;
          color: #333;
          }
@@ -104,7 +104,7 @@ transform: rotate(60deg);
                   <table>
                      <tr>
                         <td class="title"><img  src=${photo}
-                           style="width:100%; max-width:156px; max-height:100px;"></td>
+                           style="width:100%; max-height:90px;"></td>
                         <td>
                         <td>
                         <div id="watermark">
