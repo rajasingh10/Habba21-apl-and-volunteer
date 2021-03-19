@@ -5,12 +5,12 @@ const cors = require('cors');
 const morgan = require('morgan');   
 const path = require('path')
 
-let sslRedirect = require('heroku-ssl-redirect');
+
 
 const app = express();
 
 const port = process.env.PORT || 5000;
-app.use(sslRedirect());
+
 // Middlewares
 app.use(morgan('dev'));
 app.use(cors());
