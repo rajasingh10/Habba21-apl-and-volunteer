@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
-
-
-
+import {ToastsContainer, ToastsStore} from 'react-toasts';
 
 
 
@@ -22,9 +20,11 @@ export const VolunteerRegistration = () => {
       const data = await axios.post('/api/add-volunteer' , states)
       console.log(data.data)
       let message  =  data.data.message
+
     
       if (message === 'Resgistration Successful'){
         console.log('Successfully Registered')
+        ToastsStore.success("SuccessFully Registered")
       }
     
     
@@ -50,6 +50,12 @@ try {
   const data = await axios.post('/api/check-reg' , states)
   console.log(data.data)
   let message  =  data.data.message
+
+
+  if (message.split(" ")[0] === "Already") {
+    ToastsStore.info("AUID or Email already Registered, Contact CPRD for further changes. ")
+  }
+  
 
   if (message === 'New Registration'){
       register(state)
@@ -216,6 +222,8 @@ check_exists(state)
 
         </div></div>
       </form>{" "}
+      <ToastsContainer store={ToastsStore} position="top_center" />
+
     </div>
   );
 };

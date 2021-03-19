@@ -14,14 +14,36 @@ const  onVolunteer = () =>{
 
 
 
-    return (
-        <div>
-        <h1 onClick={onAPL}>
-            APl Registration
-        </h1>
-        <h1 onClick={onVolunteer}>
+    return (<div style={{width:'100vw' , height:'100vh'}} >
+
+        <div  className='container d-flex justify-content-center '>
+            <div className=''>
+        <button     style={{
+                    color: "#0DABF1",
+                    background: "white",
+                  borderRadius: "20px",
+                  fontWeight: 500,
+             margin:'20px 20px',
+                  padding: "3px 22px",
+                  border: "none",
+                }} onClick={onAPL}>
+            APL Registration
+        </button>
+        <br/>
+        <button 
+            style={{
+                color: "#0DABF1",
+                background: "white",
+                borderRadius: "20px",
+                fontWeight: 500,
+                padding: "3px 22px",
+                border: "none",
+              }}
+              onClick={onVolunteer}>
             VolunteerRegistration
-        </h1>
+        </button>
+        </div>
+        </div>
         </div>
     )
 }

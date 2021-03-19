@@ -2,6 +2,19 @@ body{
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
 
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 .register{
 /* background-color: #fff; */

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
-import {ToastsContainer, ToastsStore} from 'react-toasts';
- 
+import { ToastsContainer, ToastsStore } from "react-toasts";
 
 const fileToDataUri = (file) =>
-
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -37,17 +35,13 @@ class AplRegistrationForm extends Component {
       let c = await axios.put("/pdf/check-reg", this.state);
 
       console.log(c.data.data);
-      ToastsStore.info(c.data.message)
-      console.log(c.data.message)
+      ToastsStore.info(c.data.message);
+      console.log(c.data.message);
 
+      if (c.data.message.split(" ")[0] != "Already") {
+        this.createAndDownloadPdf(c.data.data);
+      }
 
-      if(c.data.message.split(" ")[0] != "Already")
-     { this.createAndDownloadPdf(c.data.data);
-     }
-      
-
- 
-  
       // this.setState(data);
     } catch (error) {}
   };
@@ -66,16 +60,13 @@ class AplRegistrationForm extends Component {
     // console.log(this.state)
   };
 
-  checkPhoto =  () =>{
-    if(this.state.photo === ''){
-      ToastsStore.error("Upload a Photo")
-      return
+  checkPhoto = () => {
+    if (this.state.photo === "") {
+      ToastsStore.error("Upload a Photo");
+      return;
     }
-    return
-  }
-
-
-
+    return;
+  };
 
   setGender(event) {
     this.setState({ gender: event.target.value });
@@ -91,19 +82,17 @@ class AplRegistrationForm extends Component {
         return;
       }
 
-      if(file.size > 500000) {
+      if (file.size > 500000) {
         ToastsStore.error("Please upload a file smaller than 500KB");
-        return
+        return;
       }
       try {
         fileToDataUri(file).then((dataUri) => {
           this.setState({ photo: dataUri || null });
         });
       } catch (error) {
-        
-        ToastsStore.error('File Upload Error')
+        ToastsStore.error("File Upload Error");
       }
-    
     };
 
     return (
@@ -111,10 +100,9 @@ class AplRegistrationForm extends Component {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-       
+
             this.checkreg(this.state);
           }}
-
 
           // className=" needs-validation" noValidate
         >
@@ -122,7 +110,7 @@ class AplRegistrationForm extends Component {
             <div class="col-md-6">
               <div class="form-group has-success">
                 <input
-                class="form-control" 
+                  class="form-control"
                   type="email"
                   pattern="^[A-Za-z0-9]+(.|_)+[A-Za-z0-9]+@+acharya.ac.in$"
                   required
@@ -130,9 +118,9 @@ class AplRegistrationForm extends Component {
                   name="email"
                   onChange={this.handleChange}
                 />
-                <div style={{fontSize:'10px' , }} >
-       Email-ID provided by Acharya
-    </div>
+                <div style={{ fontSize: "10px" }}>
+                  Email-ID provided by Acharya
+                </div>
               </div>
               <div class="form-group has-success">
                 <input
@@ -189,64 +177,72 @@ class AplRegistrationForm extends Component {
               </div>
               <div class="form-group">
                 <input
-               onFocus={
-                (e)=> {
-                  e.currentTarget.type = "date";
-                  e.currentTarget.focus();
-                 }
-               }
-
-               onBlur={
-                (e)=> {
-                  e.currentTarget.type = "text";
-                  e.currentTarget.blur();
-                 }
-               }
-                type="text"
+                  onFocus={(e) => {
+                    e.currentTarget.type = "date";
+                    e.currentTarget.focus();
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.type = "text";
+                    e.currentTarget.blur();
+                  }}
+                  type="text"
                   className="form-control"
-           placeholder="Date of Birth"
+                  placeholder="Date of Birth"
                   name="dob"
                   onChange={this.handleChange}
                 />
-
-
               </div>
               <div class="form-group">
-              {/* <label htmlFor="category">Choose a category: &nbsp;</label> */}
-              <select
-                id="category"
-                className="form-control"
-                name="category"
-                defaultValue='NULL'
-                onChange={(e) => this.setState({ category: e.target.value })}
-              required
-             >
-                  <option value="NULL" disabled>Select Category</option>
-                <option value="Batsman">Batsman</option>
-                <option value="Bowler">Bowler</option>
-                <option value="All Rounder">All Rounder</option>
-              </select></div>
-      
+                {/* <label htmlFor="category">Choose a category: &nbsp;</label> */}
+                <select
+                  id="category"
+                  className="form-control"
+                  name="category"
+                  defaultValue="NULL"
+                  onChange={(e) => this.setState({ category: e.target.value })}
+                  required
+                >
+                  <option value="NULL" disabled>
+                    Select Category
+                  </option>
+                  <option value="Batsman">Batsman</option>
+                  <option value="Bowler">Bowler</option>
+                  <option value="All Rounder">All Rounder</option>
+                </select>
+              </div>
 
-              <div required onChange={this.setGender.bind(this)} value={this.state.type}>
+              <div
+                required
+                onChange={this.setGender.bind(this)}
+                value={this.state.type}
+              >
                 <input type="radio" value="M" name="gender" /> Male &nbsp;
                 <input type="radio" value="F" name="gender" /> Female &nbsp;
               </div>
               <div
-               required
+                required
                 id="register-type"
                 name="register-type"
                 onChange={this.setType.bind(this)}
               >
-                <input type="radio" value="Faculty" name="type" checked={this.state.type === 'Faculty' ? true : false} /> Faculty
-                &nbsp; &nbsp;
-                <input type="radio" value="Student" name="type"  checked={this.state.type === 'Student' ? true : false}/> Student
-                &nbsp;
+                <input
+                  type="radio"
+                  value="Faculty"
+                  name="type"
+                  checked={this.state.type === "Faculty" ? true : false}
+                />{" "}
+                Faculty &nbsp; &nbsp;
+                <input
+                  type="radio"
+                  value="Student"
+                  name="type"
+                  checked={this.state.type === "Student" ? true : false}
+                />{" "}
+                Student &nbsp;
               </div>
 
               <input
                 type="file"
-                
                 required
                 id="photo"
                 name="photo"
@@ -285,7 +281,7 @@ class AplRegistrationForm extends Component {
                   padding: "3px 22px",
                   border: "none",
                 }}
-                onClick={e=>     this.checkPhoto()}
+                onClick={(e) => this.checkPhoto()}
               >
                 Register
               </button>
