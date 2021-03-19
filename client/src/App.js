@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AplRegistrationForm from './Pages/AplRegistraionForm'
 import Home from './Pages/Home';
 import Mainpage from './Pages/Mainpage';
+import VolunteerMain from './Pages/VolunteerMain';
 import { VolunteerRegistration } from './Pages/VolunteerRegistration';
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route
         exact
         path='/Volunteer-Registration'
-        component={VolunteerRegistration}
+        component={VolunteerMain}
       />
        <Route
         exact

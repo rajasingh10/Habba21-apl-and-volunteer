@@ -5,6 +5,7 @@ import {ToastsContainer, ToastsStore} from 'react-toasts';
  
 
 const fileToDataUri = (file) =>
+
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -36,13 +37,16 @@ class AplRegistrationForm extends Component {
       let c = await axios.put("/pdf/check-reg", this.state);
 
       console.log(c.data.data);
+      ToastsStore.info(c.data.message)
+      console.log(c.data.message)
 
-      this.createAndDownloadPdf(c.data.data);
 
-   
+      if(c.data.message.split(" ")[0] != "Already")
+     { this.createAndDownloadPdf(c.data.data);
+     }
+      
 
-        ToastsStore.info(c.data.message)
-        console.log(c.data.message)
+ 
   
       // this.setState(data);
     } catch (error) {}
@@ -62,6 +66,17 @@ class AplRegistrationForm extends Component {
     // console.log(this.state)
   };
 
+  checkPhoto =  () =>{
+    if(this.state.photo === ''){
+      ToastsStore.error("Upload a Photo")
+      return
+    }
+    return
+  }
+
+
+
+
   setGender(event) {
     this.setState({ gender: event.target.value });
   }
@@ -76,9 +91,19 @@ class AplRegistrationForm extends Component {
         return;
       }
 
-      fileToDataUri(file).then((dataUri) => {
-        this.setState({ photo: dataUri || null });
-      });
+      if(file.size > 500000) {
+        ToastsStore.error("Please upload a file smaller than 500KB");
+        return
+      }
+      try {
+        fileToDataUri(file).then((dataUri) => {
+          this.setState({ photo: dataUri || null });
+        });
+      } catch (error) {
+        
+        ToastsStore.error('File Upload Error')
+      }
+    
     };
 
     return (
@@ -86,6 +111,7 @@ class AplRegistrationForm extends Component {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+       
             this.checkreg(this.state);
           }}
 
@@ -220,6 +246,7 @@ class AplRegistrationForm extends Component {
 
               <input
                 type="file"
+                
                 required
                 id="photo"
                 name="photo"
@@ -258,6 +285,7 @@ class AplRegistrationForm extends Component {
                   padding: "3px 22px",
                   border: "none",
                 }}
+                onClick={e=>     this.checkPhoto()}
               >
                 Register
               </button>
