@@ -144,14 +144,31 @@ class AplRegistrationForm extends Component {
                 />
               </div>
               <div class="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  required
-                  placeholder="College"
-                  name="college"
-                  onChange={this.handleChange}
-                />
+       
+        
+        <select  class="form-control"  required  name="college"   placeholder="College"
+                  onChange={this.handleChange}>
+                          <option selected value="">Choose Your Institute</option>
+                          <option value="AIT">Acharya Institute of Technology</option>
+                          <option value="ANRVASA">Acharya's NRV School of Architecture</option>
+                          <option value="ABMRCP">Acharya & B.M. Reddy College of Pharmacy</option>
+                          <option value="ASM">Acharya School of Management</option>
+                          <option value="AP">Acharya Polytechnic</option>
+                          <option value="AIGS">Acharya Institute of Graduate Studies</option>
+                          <option value="SNSN">Smt. Nagarathnamma School of Nursing</option>
+                          <option value="SNCN"> Smt. Nagarathnamma College of Nursing</option>
+                          <option value="ASE">Acharya College of Education</option>
+                          <option value="APC"> Acharya Pre-University College</option>
+                          <option value="ASL">Acharya School of Law</option>
+                          <option value="ASD">Acharya School of Design</option>
+                          <option value="AIAS">Acharya Institute of Allied Science</option>
+                          <option value="AIP">Acharya's NR Institute of Physiotheraphy</option>
+                          <option  value="OTH">Others</option> <br/> 
+                          </select>
+
+        
+
+        
               </div>
               <div class="form-group">
                 <input
@@ -167,13 +184,28 @@ class AplRegistrationForm extends Component {
 
             <div class="col-md-6">
               <div class="form-group">
-                <input
+               
+               
+              <select       placeholder="" class="form-control"  required  name='year' onChange={this.handleChange}>
+                          <option selected value="">Year Of Study</option>
+                          <option value="1">1st Year</option>
+                          <option value="2">2nd Year</option>
+                          <option value="3">3rd Year</option>
+                          <option value="4">4th Year</option>
+                          <option value="5">5th Year</option>
+                          <option value="6">6th Year</option>
+
+        </select>
+
+               
+                {/* <input
                   type="text"
                   className="form-control"
                   placeholder="Year"
+                  value={this.state.year}
                   name="year"
                   onChange={this.handleChange}
-                />
+                /> */}
               </div>
               <div class="form-group">
                 <input
