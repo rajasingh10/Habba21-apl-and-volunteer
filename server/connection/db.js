@@ -3,7 +3,7 @@ const util = require('util');
 require('dotenv').config()
 //db
 
-const dbName = 'habba';
+const dbName = 'heroku_94599e163e61f58';
 
 const config = {
   production: {
@@ -12,7 +12,7 @@ port:3306,
       host: process.env.HOSTADD,
       user: process.env.USERNA,
       password: process.env.PASS,
-      database: 'habba',
+      database: 'heroku_94599e163e61f58',
 
 
     // 
@@ -36,7 +36,7 @@ config.conn = mysql.createPool(
 config.conn.query = util.promisify(config.conn.query);
 config.initDB = (async () => {
   try {
-    await config.conn.query('USE habba');
+    await config.conn.query('USE heroku_94599e163e61f58');
     const connection = await config.conn.query('SELECT * from apl_players');
     console.log('db initialized');
     // console.log(connection);

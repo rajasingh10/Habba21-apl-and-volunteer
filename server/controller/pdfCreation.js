@@ -88,7 +88,7 @@ module.exports = {
                   function (error, results, fields) {
                     res.status(200).json({
                       data: results[0],
-                      message: "Registration Successful",
+                      message: "Please wait for the files to download",
                     });
                   }
                 );

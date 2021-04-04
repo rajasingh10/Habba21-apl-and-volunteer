@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { ToastsContainer, ToastsStore } from "react-toasts";
-
+import { storage } from "../Firebase/index"
 const fileToDataUri = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -12,6 +12,8 @@ const fileToDataUri = (file) =>
     reader.readAsDataURL(file);
   });
 
+
+ 
 
 
   const departments = (value) =>{
@@ -78,6 +80,52 @@ class AplRegistrationForm extends Component {
     dob: "",
     depts:<></>
   };
+
+
+ photoChange = e => {
+    if (e.target.files[0]) {
+      try {
+        this.handleUpload(e.target.files[0]);
+      } catch (error) {
+        ToastsStore.error("File Upload Error");
+        
+      }
+      
+    }
+  };
+
+
+ handleUpload = (image) => {
+    const uploadTask = storage.ref(`APL-2021/${this.state.email+'-'+image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+      console.log(progress)
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("APL-2021")
+          .child(this.state.email+'-'+image.name)
+          .getDownloadURL()
+          .then(url => {
+            console.log(url);
+            this.setState({ photo: url });
+            
+            ToastsStore.success('File uploaded Successfully')
+
+
+          });
+      }
+    );
+  };
+
+
 
   handleChange = ({ target: { value, name } }) =>
     this.setState({ [name]: value });
@@ -146,20 +194,22 @@ class AplRegistrationForm extends Component {
   }
 
   render() {
-    const readImage = (file) => {
+    const readImage = (e) => {
+     let  file = e.target.files[0];
       if (!file) {
         this.setState({ photo: "" });
         return;
       }
 
-      if (file.size > 500000) {
-        ToastsStore.error("Please upload a file smaller than 500KB");
+      if (file.size > 1000000) {
+        ToastsStore.error("Please upload a file smaller than 1MB");
         return;
       }
       try {
-        fileToDataUri(file).then((dataUri) => {
-          this.setState({ photo: dataUri || null });
-        });
+        // fileToDataUri(file).then((dataUri) => {
+        //   this.setState({ photo: dataUri || null });
+        // });
+        this.photoChange(e)
       } catch (error) {
         ToastsStore.error("File Upload Error");
       }
@@ -363,7 +413,7 @@ class AplRegistrationForm extends Component {
                 name="photo"
                 accept="image/png, image/jpeg"
                 style={{ display: "none" }}
-                onChange={(e) => readImage(e.target.files[0] || null)}
+                onChange={(e) => readImage(e || null)}
               />
               <br></br>
               <button
