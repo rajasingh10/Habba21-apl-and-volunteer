@@ -24,11 +24,14 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-promise-router": "^4.0.1",
+    "firebase": "^9.1.1",
+    "firebase-admin": "^9.12.0",
     "heroku-ssl-redirect": "^0.1.1",
     "html-pdf": "^2.2.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "node-mailjet": "^3.3.1",
+    "nodemon": "^2.0.13",
     "path": "^0.12.7",
     "pdf-to-base64": "^1.0.3"
   }

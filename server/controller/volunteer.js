@@ -7,7 +7,10 @@ const successTemplate = require("../Mail-success");
 const MailSuccess = require("../Mail-success");
 
 sendMailRegister = (user) => {
-  const mailjet = require("node-mailjet").connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
+  const mailjet = require("node-mailjet").connect(
+    process.env.MJ_APIKEY_PUBLIC,
+    process.env.MJ_APIKEY_PRIVATE
+  );
   const request = mailjet.post("send", { version: "v3.1" }).request({
     Messages: [
       {
@@ -62,7 +65,7 @@ module.exports = {
   },
 
   register: async (req, res, next) => {
-    let query = `INSERT INTO reg_volunteer (Name, auid, email,  dob , college ,year , department  ,gender , reason , experience , whatsapp , calling ,status) VALUES ("${req.body.name}","${req.body.auid}","${req.body.email}","${req.body.dob}","${req.body.college}","${req.body.year}","${req.body.department}","${req.body.gender}","${req.body.reason}","${req.body.experience}","${req.body.whatsapp}","${req.body.calling}" , "Not Approved");`;
+    let query = `INSERT INTO reg_volunteer (Name, auid, email,  dob , college ,year , department, Tpreference1, Tpreference2, skills, gender , reason , experience , whatsapp , calling ,status) VALUES ("${req.body.name}","${req.body.auid}","${req.body.email}","${req.body.dob}","${req.body.college}","${req.body.year}","${req.body.department}","${req.body.gender}","${req.body.reason}","${req.body.experience}","${req.body.whatsapp}","${req.body.calling}" , "Not Approved");`;
 
     await db.conn.query(
       {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { ToastsContainer, ToastsStore } from "react-toasts";
-import { storage } from "../Firebase/index"
+import { storage } from "../Firebase/index";
 const fileToDataUri = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -12,58 +12,147 @@ const fileToDataUri = (file) =>
     reader.readAsDataURL(file);
   });
 
-
- 
-
-
-  const departments = (value) =>{
-
-    if(value == "AIT"){
-        return  ["AE|Aeronutical Engineering","CV|Civil Engineering","AI/ML| Artificial Intelligence & Machine Learning Engg.","AU|Automobile Engineering","BT|BioTechnology Engineering","AE|Aeronutical Engineering","CSE|Computer Science Engineering","CTM|Construction Technology & Management ","EEE|Electrical & Electronic Engineering","ECE|Electronics & Communication Engineering","ISE|Information Science & Engineering","ME|Mechanical Engineering","MSE|Manufacturing Science","MT|Mechatronics Engineering","MN|Mining Engineering","MBA|Master of Buisness Administration","MCA|Master of Computer Applications","MCFI|M.Tech in Cyber Forensics and Information Security","MCNE|M.Tech in Computer Network Engineering","MCSE|M.Tech in Computer Science and Engineering","MPSE|M.Tech in Power Systems and Engineering","MDCE|M.Tech in Digital Communication and Engineering","MBT|M.Tech in Bio Technology","MMD|M.Tech in Machine Design","OTH|Others"];
-      } else if(value == "ANRVASA"){
-        return  ["Arch|Bachelor Of Architecture","OTH|Others"];
-      } else if(value == "ABMRCP"){
-        return  ["DP|D.Pharm","BP|B.Pharm","MP|M.Pharm","PD|Pharm D","OTH|Others"];
-      }
-      else if(value == "ASM"){
-        return  ["PGDM|P.G.D.M","OTH|Others"];
-      }
-      else if(value == "ASE"){
-        return  ["DEE|Diploma in Elementary Education","BE|Bachelor of Education","OTH|Others"];
-      }
-      else if(value == "AIGS"){
-        return  ["BAJ|Bachelor of Arts in Journalism","BSC|Bachelor of science","BA|Bachelor of Arts","BSW|Bachelor of Social work","BBAI|Bachelor of Business Administration International Immersion","BC|Bachelor of Commerce","BCA|Bachelor of Computer Application","BBA|Bachelor of Business Application","BSCF|Bsc in Fashion and Apparel Design","ME|Master of Arts in Economics","MAE|Master of Arts in English","MSE|Master of Science in Electronic Media","MAJ|Master of Arts in Journalism and Mass Communication","MSW|Master of Social Work","MIB|Master of International Business","MFA|Master in Finance and Accounting","MC|Master of Commerce","MSP|Master of Science in Physics","MSC|Master of Science in Chemistry","MSM|Master of Science in Mathematics","MSPy|Master of Science in Psychology","MsF|Master of Science in Fashion and Apparel Design","OTH|Others"];
-      }
-        else if(value == "AP"){
-        return  ["AE|Aeronautical Engineering","ADFT|Apparel Design & Fabrication Technology","ArchE|Architecture Engineering","AuE|Automobile Engineering","CE|Civil Engineering","CP|Commercial Practise","CSE|Computer Science and Engineering","EEE|Electrical & Electronics Engineering","ECE|Electrical & Communication Engineering","ME|Mechanical Engineering","MtE|Mechatronics Engineering","MiE|Mining Engineering","OTH|Others"];
-      }
-      else if(value == "SNSN"){
-        return  ["GNM|General Nursing and MidWife","BBN|Basic BSc Nursingy","PBBN|Post Basic BSc Nursing","MN|Msc Nursing","OTH|Others"];
-      }
-      else if(value == "SNCN"){
-         return  ["BBN|Basic BSc Nursingy","PBBN|Post Basic BSc Nursing","MN|Msc Nursing","OTH|Others"];
-    }
-      else if(value == "APC"){
-        return  ["PCMB|Science-Physics Chemistry Mathematics and Biology","PCMC|Science-Physics Chemistry Mathematics and Computer Science","PCME|Science-Physics Chemistry Mathematics and Electronics","COM|Commerce-Computer Science Economics Business Studies and Accountancy","OTH|Others"];
-      }
-      else if(value == "ASL"){
-        return  ["BA LLB|BA LLB","LLB|LLB","BBA LLB|BBA LLB","OTH|Others"];
-      }
-      else if(value == "ASD"){
-        return  ["PA|Painting","GD|Graphics Design","AMD|Animation and Multimedia Design","ISD|Interior and Spatial Design","PD|Product Designy","OTH|Others"];
-      }
-      else if(value == "AIAS"){
-          return  ["BAT|B.Sc in Anesthesia Technology","BOTT|B.Sc Operation Theater Technology","BRCT|B.Sc in Renal Dialysis Technology","BRT|BSc in Radio Therapy","BO|BSc in Optometry","OTH|Others" ];
-        }
-        else if(value == "AIP"){
-          return  ["BOP|Bachelor of Physiotheraphy","OTH|Others"];
-        }
-        else if(value == ""){
-          return  ["|"];
-        }
-    
-    }
-  
+const departments = (value) => {
+  if (value == "AIT") {
+    return [
+      "FRST|Department of First Year",
+      "AE|Aeronutical Engineering",
+      "CV|Civil Engineering",
+      "AI/ML| Artificial Intelligence & Machine Learning Engg.",
+      "AU|Automobile Engineering",
+      "BT|BioTechnology Engineering",
+      "AE|Aeronutical Engineering",
+      "CSE|Computer Science Engineering",
+      "CTM|Construction Technology & Management ",
+      "EEE|Electrical & Electronic Engineering",
+      "ECE|Electronics & Communication Engineering",
+      "ISE|Information Science & Engineering",
+      "ME|Mechanical Engineering",
+      "MSE|Manufacturing Science",
+      "MT|Mechatronics Engineering",
+      "MN|Mining Engineering",
+      "MBA|Master of Buisness Administration",
+      "MCA|Master of Computer Applications",
+      "MCFI|M.Tech in Cyber Forensics and Information Security",
+      "MCNE|M.Tech in Computer Network Engineering",
+      "MCSE|M.Tech in Computer Science and Engineering",
+      "MPSE|M.Tech in Power Systems and Engineering",
+      "MDCE|M.Tech in Digital Communication and Engineering",
+      "MBT|M.Tech in Bio Technology",
+      "MMD|M.Tech in Machine Design",
+      "OTH|Others",
+    ];
+  } else if (value == "ANRVASA") {
+    return ["Arch|Bachelor Of Architecture", "OTH|Others"];
+  } else if (value == "ABMRCP") {
+    return [
+      "DP|D.Pharm",
+      "BP|B.Pharm",
+      "MP|M.Pharm",
+      "PD|Pharm D",
+      "OTH|Others",
+    ];
+  } else if (value == "ASM") {
+    return ["PGDM|P.G.D.M", "OTH|Others"];
+  } else if (value == "ASE") {
+    return [
+      "DEE|Diploma in Elementary Education",
+      "BE|Bachelor of Education",
+      "OTH|Others",
+    ];
+  } else if (value == "AIGS") {
+    return [
+      "BAJ|Bachelor of Arts in Journalism",
+      "BSC|Bachelor of science",
+      "BA|Bachelor of Arts",
+      "BSW|Bachelor of Social work",
+      "BBAI|Bachelor of Business Administration International Immersion",
+      "BC|Bachelor of Commerce",
+      "BCA|Bachelor of Computer Application",
+      "BBA|Bachelor of Business Application",
+      "BSCF|Bsc in Fashion and Apparel Design",
+      "ME|Master of Arts in Economics",
+      "MAE|Master of Arts in English",
+      "MSE|Master of Science in Electronic Media",
+      "MAJ|Master of Arts in Journalism and Mass Communication",
+      "MSW|Master of Social Work",
+      "MIB|Master of International Business",
+      "MFA|Master in Finance and Accounting",
+      "MC|Master of Commerce",
+      "MSP|Master of Science in Physics",
+      "MSC|Master of Science in Chemistry",
+      "MSM|Master of Science in Mathematics",
+      "MSPy|Master of Science in Psychology",
+      "MsF|Master of Science in Fashion and Apparel Design",
+      "OTH|Others",
+    ];
+  } else if (value == "AP") {
+    return [
+      "AE|Aeronautical Engineering",
+      "ADFT|Apparel Design & Fabrication Technology",
+      "ArchE|Architecture Engineering",
+      "AuE|Automobile Engineering",
+      "CE|Civil Engineering",
+      "CP|Commercial Practise",
+      "CSE|Computer Science and Engineering",
+      "EEE|Electrical & Electronics Engineering",
+      "ECE|Electrical & Communication Engineering",
+      "ME|Mechanical Engineering",
+      "MtE|Mechatronics Engineering",
+      "MiE|Mining Engineering",
+      "OTH|Others",
+    ];
+  } else if (value == "SNSN") {
+    return [
+      "GNM|General Nursing and MidWife",
+      "BBN|Basic BSc Nursingy",
+      "PBBN|Post Basic BSc Nursing",
+      "MN|Msc Nursing",
+      "OTH|Others",
+    ];
+  } else if (value == "SNCN") {
+    return [
+      "BBN|Basic BSc Nursingy",
+      "PBBN|Post Basic BSc Nursing",
+      "MN|Msc Nursing",
+      "OTH|Others",
+    ];
+    // } else if (value == "APC") {
+    //   return [
+    //     "PCMB|Science-Physics Chemistry Mathematics and Biology",
+    //     "PCMC|Science-Physics Chemistry Mathematics and Computer Science",
+    //     "PCME|Science-Physics Chemistry Mathematics and Electronics",
+    //     "COM|Commerce-Computer Science Economics Business Studies and Accountancy",
+    //     "OTH|Others",
+    //   ];
+    // } else if (value == "ASL") {
+    //   return ["BA LLB|BA LLB", "LLB|LLB", "BBA LLB|BBA LLB", "OTH|Others"];
+  } else if (value == "ASD") {
+    return [
+      "PA|Painting",
+      "GD|Graphics Design",
+      "AMD|Animation and Multimedia Design",
+      "ISD|Interior and Spatial Design",
+      "PD|Product Designy",
+      "OTH|Others",
+    ];
+  } else if (value == "AIAS") {
+    return [
+      "BAT|B.Sc in Anesthesia Technology",
+      "BOTT|B.Sc Operation Theater Technology",
+      "BRCT|B.Sc in Renal Dialysis Technology",
+      "BRT|BSc in Radio Therapy",
+      "BO|BSc in Optometry",
+      "OTH|Others",
+    ];
+  } else if (value == "AIP") {
+    return ["BOP|Bachelor of Physiotheraphy", "OTH|Others"];
+  } else if (value == "AIEFL") {
+    return ["OTH|Others"];
+  } else if (value == "") {
+    return ["|"];
+  }
+};
 
 class AplRegistrationForm extends Component {
   state = {
@@ -78,54 +167,48 @@ class AplRegistrationForm extends Component {
     type: "Student",
     email: "",
     dob: "",
-    depts:<></>
+    depts: <></>,
   };
 
-
- photoChange = e => {
+  photoChange = (e) => {
     if (e.target.files[0]) {
       try {
         this.handleUpload(e.target.files[0]);
       } catch (error) {
         ToastsStore.error("File Upload Error");
-        
       }
-      
     }
   };
 
-
- handleUpload = (image) => {
-    const uploadTask = storage.ref(`APL-2021/${this.state.email+'-'+image.name}`).put(image);
+  handleUpload = (image) => {
+    const uploadTask = storage
+      .ref(`APL-2021/${this.state.email + "-" + image.name}`)
+      .put(image);
     uploadTask.on(
       "state_changed",
-      snapshot => {
+      (snapshot) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
-      console.log(progress)
+        console.log(progress);
       },
-      error => {
+      (error) => {
         console.log(error);
       },
       () => {
         storage
           .ref("APL-2021")
-          .child(this.state.email+'-'+image.name)
+          .child(this.state.email + "-" + image.name)
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             console.log(url);
             this.setState({ photo: url });
-            
-            ToastsStore.success('File uploaded Successfully')
 
-
+            ToastsStore.success("File uploaded Successfully");
           });
       }
     );
   };
-
-
 
   handleChange = ({ target: { value, name } }) =>
     this.setState({ [name]: value });
@@ -146,9 +229,6 @@ class AplRegistrationForm extends Component {
     } catch (error) {}
   };
 
-
-
-
   createAndDownloadPdf = (formData) => {
     console.log(formData.name);
     axios
@@ -163,20 +243,15 @@ class AplRegistrationForm extends Component {
     // console.log(this.state)
   };
 
-  dset = (value) =>{
-    let department = departments(value)
-    
-    let o = department?.map((ea)=>{
+  dset = (value) => {
+    let department = departments(value);
 
-      return <option value={ea.split('|')[0]}>{ea.split('|')[1]}</option> 
-      
-       }) 
+    let o = department?.map((ea) => {
+      return <option value={ea.split("|")[0]}>{ea.split("|")[1]}</option>;
+    });
 
-   this.setState({ depts : o })
-   
-     }
-
- 
+    this.setState({ depts: o });
+  };
 
   checkPhoto = () => {
     if (this.state.photo === "") {
@@ -195,7 +270,7 @@ class AplRegistrationForm extends Component {
 
   render() {
     const readImage = (e) => {
-     let  file = e.target.files[0];
+      let file = e.target.files[0];
       if (!file) {
         this.setState({ photo: "" });
         return;
@@ -209,13 +284,11 @@ class AplRegistrationForm extends Component {
         // fileToDataUri(file).then((dataUri) => {
         //   this.setState({ photo: dataUri || null });
         // });
-        this.photoChange(e)
+        this.photoChange(e);
       } catch (error) {
         ToastsStore.error("File Upload Error");
       }
     };
-
-     
 
     return (
       <>
@@ -230,6 +303,29 @@ class AplRegistrationForm extends Component {
         >
           <div class="row register-form">
             <div class="col-md-6">
+              <div
+                required
+                id="register-type"
+                name="register-type"
+                onChange={this.setType.bind(this)}
+                class="mb-3"
+              >
+                <input
+                  type="radio"
+                  value="Faculty"
+                  name="type"
+                  checked={this.state.type === "Faculty" ? true : false}
+                />{" "}
+                Faculty &nbsp; &nbsp;
+                <input
+                  type="radio"
+                  value="Student"
+                  name="type"
+                  checked={this.state.type === "Student" ? true : false}
+                />{" "}
+                Student &nbsp;
+              </div>
+
               <div class="form-group has-success">
                 <input
                   class="form-control"
@@ -266,43 +362,70 @@ class AplRegistrationForm extends Component {
                 />
               </div>
               <div class="form-group">
-       
-        
-        <select  class="form-control"  required  name="college"   placeholder="College"
-                  onChange={ e => {this.handleChange(e) ;  this.dset(e.target.value) }}>
-                          <option selected value="">Choose Your Institute</option>
-                          <option value="AIT">Acharya Institute of Technology</option>
-                          <option value="ANRVASA">Acharya's NRV School of Architecture</option>
-                          <option value="ABMRCP">Acharya & B.M. Reddy College of Pharmacy</option>
-                          <option value="ASM">Acharya School of Management</option>
-                          <option value="AP">Acharya Polytechnic</option>
-                          <option value="AIGS">Acharya Institute of Graduate Studies</option>
-                          <option value="SNSN">Smt. Nagarathnamma School of Nursing</option>
-                          <option value="SNCN"> Smt. Nagarathnamma College of Nursing</option>
-                          <option value="ASE">Acharya College of Education</option>
-                          <option value="APC"> Acharya Pre-University College</option>
-                          <option value="ASL">Acharya School of Law</option>
-                          <option value="ASD">Acharya School of Design</option>
-                          <option value="AIAS">Acharya Institute of Allied Science</option>
-                          <option value="AIP">Acharya's NR Institute of Physiotheraphy</option>
-                          <option  value="OTH">Others</option> <br/> 
-                          </select>
-
-        
-
-        
+                <select
+                  class="form-control"
+                  required
+                  name="college"
+                  placeholder="College"
+                  onChange={(e) => {
+                    this.handleChange(e);
+                    this.dset(e.target.value);
+                  }}
+                >
+                  <option selected value="">
+                    Choose Your Institute
+                  </option>
+                  <option value="AIT">Acharya Institute of Technology</option>
+                  <option value="ANRVASA">
+                    Acharya's NRV School of Architecture
+                  </option>
+                  <option value="ABMRCP">
+                    Acharya & B.M. Reddy College of Pharmacy
+                  </option>
+                  <option value="ASM">Acharya School of Management</option>
+                  <option value="AP">Acharya Polytechnic</option>
+                  <option value="AIGS">
+                    Acharya Institute of Graduate Studies
+                  </option>
+                  <option value="SNSN">
+                    Smt. Nagarathnamma School of Nursing
+                  </option>
+                  <option value="SNCN">
+                    {" "}
+                    Smt. Nagarathnamma College of Nursing
+                  </option>
+                  <option value="ASE">Acharya College of Education</option>
+                  {/* <option value="APC"> Acharya Pre-University College</option> */}
+                  {/* <option value="ASL">Acharya School of Law</option> */}
+                  <option value="ASD">Acharya School of Design</option>
+                  <option value="AIAS">
+                    Acharya Institute of Allied Science
+                  </option>
+                  <option value="AIP">
+                    Acharya's NR Institute of Physiotheraphy
+                  </option>
+                  <option value="AIEFL">
+                    Acharya Institute of English & Foreign Language
+                  </option>
+                  {/* <option value="OTH">Others</option> <br /> */}
+                </select>
               </div>
               <div class="form-group">
-              <select       placeholder="department" class="form-control"  required name='department'  onChange={this.handleChange}
-    >
-                          <option selected value="">Choose Your Department</option>
+                <select
+                  placeholder="department"
+                  class="form-control"
+                  required
+                  name="department"
+                  onChange={this.handleChange}
+                >
+                  <option selected value="">
+                    Choose Your Department
+                  </option>
 
-{this.state.depts}
+                  {this.state.depts}
+                </select>
 
-      </select>
-
-
-{/* 
+                {/* 
                 <input
                   type="text"
                   className="form-control"
@@ -317,20 +440,24 @@ class AplRegistrationForm extends Component {
 
             <div class="col-md-6">
               <div class="form-group">
-               
-               
-              <select       placeholder="" class="form-control"  required  name='year' onChange={this.handleChange}>
-                          <option selected value="">Year Of Study</option>
-                          <option value="1">1st Year</option>
-                          <option value="2">2nd Year</option>
-                          <option value="3">3rd Year</option>
-                          <option value="4">4th Year</option>
-                          <option value="5">5th Year</option>
-                          <option value="6">6th Year</option>
+                <select
+                  placeholder=""
+                  class="form-control"
+                  required
+                  name="year"
+                  onChange={this.handleChange}
+                >
+                  <option selected value="">
+                    Year Of Study
+                  </option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                  <option value="5">5th Year</option>
+                  <option value="6">6th Year</option>
+                </select>
 
-        </select>
-
-               
                 {/* <input
                   type="text"
                   className="form-control"
@@ -383,27 +510,6 @@ class AplRegistrationForm extends Component {
               >
                 <input type="radio" value="M" name="gender" /> Male &nbsp;
                 <input type="radio" value="F" name="gender" /> Female &nbsp;
-              </div>
-              <div
-                required
-                id="register-type"
-                name="register-type"
-                onChange={this.setType.bind(this)}
-              >
-                <input
-                  type="radio"
-                  value="Faculty"
-                  name="type"
-                  checked={this.state.type === "Faculty" ? true : false}
-                />{" "}
-                Faculty &nbsp; &nbsp;
-                <input
-                  type="radio"
-                  value="Student"
-                  name="type"
-                  checked={this.state.type === "Student" ? true : false}
-                />{" "}
-                Student &nbsp;
               </div>
 
               <input

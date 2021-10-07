@@ -8,7 +8,10 @@ const { response } = require("express");
 // send email function
 
 sendMail = (user, string64) => {
-  const mailjet = require("node-mailjet").connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
+  const mailjet = require("node-mailjet").connect(
+    process.env.MJ_APIKEY_PUBLIC,
+    process.env.MJ_APIKEY_PRIVATE
+  );
   const request = mailjet.post("send", { version: "v3.1" }).request({
     Messages: [
       {
@@ -57,9 +60,10 @@ module.exports = {
       async function (error, results, fields) {
         if (error) {
           res.status(400).json({
-            message: "Invalid DATA ",error
+            message: "Invalid DATA ",
+            error,
           });
-          return
+          return;
         }
 
         if (!results?.length) {
@@ -74,10 +78,10 @@ module.exports = {
               if (error) {
                 res.status(400).json({
                   message: "Invalid Data",
-                  error
+                  error,
                 });
-                console.log(error)
-                return
+                console.log(error);
+                return;
               }
 
               if (results) {
@@ -115,33 +119,28 @@ module.exports = {
   },
 
   createPdf: async (req, res, next) => {
-    pdf.create( pdfTemplate(req.body), {}).toFile(`result.pdf`, async (err) => {
+    pdf.create(pdfTemplate(req.body), {}).toFile(`result.pdf`, async (err) => {
       if (err) {
         res.send(Promise.reject());
+      } else {
+        await res.send(Promise.resolve());
+
+        let base64 = "";
+        await pdf2base64(path.join(__dirname, `../../result.pdf`))
+          .then((response) => {
+            base64 = response;
+          })
+          .catch((error) => {
+            console.log(error); //Exepection error....
+          });
+
+        sendMail(req.body, base64);
       }
-else{
-      
-  await res.send(Promise.resolve());
-  
-  let base64 = "";
-  await pdf2base64(path.join(__dirname, `../../result.pdf`))
-    .then((response) => {
-      base64 = response;
-    })
-    .catch((error) => {
-      console.log(error); //Exepection error....
     });
-
-  sendMail(req.body, base64);
-
-
-
-}});
-
   },
 
   fetchPdf: async (req, res, next) => {
-    console.log(req.body)
+    console.log(req.body);
     console.log(req.params.id);
     res.sendFile(path.join(__dirname, `../../result.pdf`));
   },

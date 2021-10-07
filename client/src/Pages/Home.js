@@ -1,70 +1,54 @@
-import React from 'react'
-import '../index.css'
-import { useHistory } from "react-router"
+import React from "react";
+import "../index.css";
+import { useHistory } from "react-router";
 const Home = () => {
-    let history = useHistory()
-const  onVolunteer = () =>{
-    history.push('/Volunteer-Registration')
-}
+  let history = useHistory();
+  const onVolunteer = () => {
+    history.push("/Volunteer-Registration");
+  };
 
+  const onAPL = () => {
+    history.push("/APL-Registration");
+  };
 
- const  onAPL = () =>{
-    history.push('/APL-Registration')
-     }
+  return (
+    <div className="HomeContainer" style={{ width: "100vw", height: "100vh" }}>
+      <h1 className="HomeHeading">Acharya Habba 2021</h1>
 
-
-
-    return (<div style={{width:'100vw' , height:'100vh'}} >
-{/* <h1 style={{textAlign:'center'}}>Habba 2021</h1> */}
-<div class="container">
-    <div class="row align-items-center">
-        <div className='d-flex flex-wrap justify-content-center align-middle'>
- <div  className=' button-container'>
-
-     {/* button 1 */}
-    <div class="glass-btn blue-btn" onClick={onVolunteer}>
-    <img src="/vol.svg" className='image' alt="facebook" />
-    </div>
-
-
-</div>
-<div  className=' button-container'>
-{/* button 2 */}
-<div class="glass-btn blue-btn" onClick={onAPL}>
-    {/* <img src="https://i.postimg.cc/DwbWDQTx/facebook.png" alt="facebook" style={{width:" 5.5em"}}/> */}
-    <img src="/apl.svg" className='image2' alt="facebook" />
-
-    </div>
-
-
-</div></div>
-
-    </div>
+      <div class="container">
+        <img
+          src="https://www.acharyahabba.in/images/003-01.png"
+          alt=""
+          style={{ width: "350px", objectFit: "contain" }}
+        />
+        <div class="row align-items-center">
+          <div className="d-flex flex-wrap justify-content-center align-middle">
+            <div className=" button-container">
+              {/* button 1 */}
+              <div class="glass-btn blue-btn" onClick={onVolunteer}>
+                <img src="/vol.svg" className="image" alt="facebook" />
+              </div>
+            </div>
+            <div className=" button-container">
+              {/* button 2 */}
+              <div class="glass-btn blue-btn" onClick={onAPL}>
+                {/* <img src="https://i.postimg.cc/DwbWDQTx/facebook.png" alt="facebook" style={{width:" 5.5em"}}/> */}
+                <img
+                  src="/apl.png"
+                  className="image2"
+                  alt="facebook"
+                  style={{ width: "300px", objectFit: "contain" }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default Home
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Home;
 
 // <div  className='container d-flex justify-content-center '>
 // <div className=''>
@@ -80,7 +64,7 @@ export default Home
 // APL Registration
 // </button>
 // <br/>
-// <button 
+// <button
 // style={{
 //     color: "#0DABF1",
 //     background: "white",
