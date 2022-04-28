@@ -2,41 +2,55 @@ const pdf = require("html-pdf");
 const pdfTemplate = require("../TemplatePdf");
 const path = require("path");
 var db = require("../connection/db");
-
 const successTemplate = require("../Mail-success");
 const MailSuccess = require("../Mail-success");
 
-sendMailRegister = (user) => {
-  const mailjet = require("node-mailjet").connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
-  const request = mailjet.post("send", { version: "v3.1" }).request({
-    Messages: [
-      {
-        From: {
-          Email: "habba@acharya.ac.in",
-          Name: "Acharya Habba",
-        },
-        To: [
-          {
-            Email: user.email,
-            Name: user.name,
-          },
-        ],
-        Subject: "Registration for Habba 2021",
-        TextPart: "Do not reply",
-        HTMLPart: MailSuccess(user),
-        CustomID: "Habba 21",
-      },
-    ],
-  });
-  request
-    .then((result) => {
-      console.log("Email sent to ", user.email);
-      //console.log(result.body)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+
+const nodemailer = require('nodemailer');
+const {google} = require('googleapis')
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
+const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN; 
+
+
+
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI)
+oAuth2Client.setCredentials({
+  refresh_token:REFRESH_TOKEN
+})
+
+const sendMail =async (user) =>{
+try {
+  const accessToken = await oAuth2Client.getAccessToken()
+  const transport = nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+      type:'OAuth2',
+      user:"acharyahabba@acharya.ac.in",
+      clientId:CLIENT_ID,
+      clientSecret:CLIENT_SECRET,
+      refreshToken:REFRESH_TOKEN,
+      accessToken:accessToken
+    }
+  })
+
+  const mailOptions={
+    from:"Habba 2022 🐯<acharyahabba@acharya.ac.in>",
+    to:user.email,
+    subject:'Volunteer Registration for Habba 2022',
+    text:"Do not reply",
+    html:MailSuccess(user),
+  }
+  const result = transport.sendMail(mailOptions)
+  console.log(`Email sent to ${user.email}`)
+  return result
+} catch (error) {
+  console.log(error);
+}
+
+}
+
 
 module.exports = {
   check_exists: async (req, res, next) => {
@@ -62,7 +76,7 @@ module.exports = {
   },
 
   register: async (req, res, next) => {
-    let query = `INSERT INTO reg_volunteer (Name, auid, email,  dob , college ,year , department  ,gender , reason , experience , whatsapp , calling ,status) VALUES ("${req.body.name}","${req.body.auid}","${req.body.email}","${req.body.dob}","${req.body.college}","${req.body.year}","${req.body.department}","${req.body.gender}","${req.body.reason}","${req.body.experience}","${req.body.whatsapp}","${req.body.calling}" , "Not Approved");`;
+    let query = `INSERT INTO reg_volunteer (Name, auid, email,  dob , college ,year , department,Tpreference1,Tpreference2,gender , reason , experience , whatsapp , calling ,status) VALUES ("${req.body.name}","${req.body.auid}","${req.body.email}","${req.body.dob}","${req.body.college}","${req.body.year}","${req.body.department}","${req.body.Tpreference1}","${req.body.Tpreference2}","${req.body.gender}","${req.body.reason}","${req.body.experience}","${req.body.whatsapp}","${req.body.calling}" , "Not Approved");`;
 
     await db.conn.query(
       {
@@ -74,7 +88,7 @@ module.exports = {
         } else if (Array.isArray(results) && !results.length) {
           res.json({ message: "Registration Failed", error }).status(400);
         } else {
-          sendMailRegister(req.body);
+          sendMail(req.body);
           res.json({ message: "Resgistration Successful", results });
         }
       }

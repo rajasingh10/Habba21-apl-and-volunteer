@@ -7,44 +7,71 @@ const { response } = require("express");
 
 // send email function
 
-sendMail = (user, string64) => {
-  const mailjet = require("node-mailjet").connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
-  const request = mailjet.post("send", { version: "v3.1" }).request({
-    Messages: [
-      {
-        From: {
-          Email: "habba@acharya.ac.in",
-          Name: "Acharya Habba",
-        },
-        To: [
-          {
-            Email: user.email,
-            Name: user.name,
-          },
-        ],
-        Subject: "Registration for APL",
-        TextPart: "Successfully registered For APL ",
-        Attachments: [
-          {
-            ContentType: "application/pdf",
-            Filename: "Registration.pdf",
-            Base64Content: string64,
-          },
-        ],
 
-        CustomID: "Habba 21",
-      },
-    ],
-  });
-  request
-    .then((result) => {
-      console.log("Email sent to ", user.email);
-      //console.log(result.body)
+
+
+
+
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis')
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
+const REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
+
+
+
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+oAuth2Client.setCredentials({
+  refresh_token: REFRESH_TOKEN
+})
+
+const sendMail = async (user, string64) => {
+  try {
+    const accessToken = await oAuth2Client.getAccessToken()
+    const transport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: 'OAuth2',
+        user: "acharyahabba@acharya.ac.in",
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: accessToken
+      }
     })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+
+    const mailOptions = {
+      from: "Habba 2022 🐯<acharyahabba@acharya.ac.in>",
+      to: user.email,
+      subject: 'Registration Successful For APL-2022',
+      text: `Hi,${user.name}, you have successfully registered for APL-2022. Please find the Application Form attached to this email`,
+      attachments: [
+        {
+          filename: `${user.name} - APL Registration.pdf`,
+          content: string64,
+          encoding: 'base64',
+          contentType: "application/pdf",
+        },
+
+      ]
+
+
+    }
+    const result = transport.sendMail(mailOptions)
+    console.log(`Email sent to ${user.email}`)
+    return result
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
+
+
+
+
+
 
 module.exports = {
   check_exists: async (req, res, next) => {
@@ -57,7 +84,7 @@ module.exports = {
       async function (error, results, fields) {
         if (error) {
           res.status(400).json({
-            message: "Invalid DATA ",error
+            message: "Invalid DATA ", error
           });
           return
         }
@@ -115,28 +142,29 @@ module.exports = {
   },
 
   createPdf: async (req, res, next) => {
-    pdf.create( pdfTemplate(req.body), {}).toFile(`result.pdf`, async (err) => {
+    pdf.create(pdfTemplate(req.body), {}).toFile(`result.pdf`, async (err) => {
       if (err) {
         res.send(Promise.reject());
       }
-else{
-      
-  await res.send(Promise.resolve());
-  
-  let base64 = "";
-  await pdf2base64(path.join(__dirname, `../../result.pdf`))
-    .then((response) => {
-      base64 = response;
-    })
-    .catch((error) => {
-      console.log(error); //Exepection error....
+      else {
+
+        await res.send(Promise.resolve());
+
+        let base64 = "";
+        await pdf2base64(path.join(__dirname, `../../result.pdf`))
+          .then((response) => {
+            base64 = response;
+          })
+          .catch((error) => {
+            console.log(error); //Exepection error....
+          });
+
+        sendMail(req.body, base64);
+
+
+
+      }
     });
-
-  sendMail(req.body, base64);
-
-
-
-}});
 
   },
 
