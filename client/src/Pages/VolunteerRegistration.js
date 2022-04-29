@@ -242,7 +242,7 @@ export const VolunteerRegistration = () => {
                 <option value="Mis">Miscellaneous</option>
                 <option value="Mestori">Mestori</option>
                 <option value="Tfest">Technical Fest</option>
-                <option value="CentralizedEvents">Centralised Events</option>
+                <option value="Photography">Photography</option>
                 <option value="Adeventure">Adventure</option>
                 <option value="AKV">Acharya Kannada Vedike</option>
                 <option value="Sports">Sports</option>
@@ -269,7 +269,7 @@ export const VolunteerRegistration = () => {
                 <option value="Mis">Miscellaneous</option>
                 <option value="Mestori">Mestori</option>
                 <option value="Tfest">Technical Fest</option>
-                <option value="CentralizedEvents">Centralised Events</option>
+                <option value="Photography">Photography</option>
                 <option value="Adeventure">Adventure</option>
                 <option value="AKV">Acharya Kannada Vedike</option>
                 <option value="Sports">Sports</option>
