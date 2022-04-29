@@ -167,8 +167,8 @@ transform: rotate(60deg);
          <h5 class="">Proctor's Signature: </h4>
          <h5 class="">HOD's Signature: </h4><br />
          <p >
-         1) Every player(student) must get this player application form signed from his department HOD/Proctor/Principal/Dean and will submit the same in CPRD reception before 30th of April 2022.<br/>
-2) Those students who have submitted the application form will undergo tryouts by the organising committee in the stadium on 3,4 and 5th of May 2022. Owners of all the teams will be present during this process.<br/>
+         1) Every player(student) must get this player application form signed from his department HOD/Proctor/Principal/Dean and will submit the same in CPRD reception before the last date of application form closing.<br/>
+2) Those students who have submitted the application form will undergo tryouts by the organising committee in the stadium. Owners of all the teams will be present during this process.<br/>
 3)Only players who have participated in tryouts are eligible for the auction and to take part in APL Season-7.<br/>
 4)Year Back Students are not allowed to participate </br>
          </p>
