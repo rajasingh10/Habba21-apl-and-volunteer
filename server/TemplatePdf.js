@@ -1,6 +1,6 @@
-module.exports = ({ player_id,name, year, category,department,college,auid,photo,email,gender,dob , type}) => {
-    const today = new Date();
-return `<!doctype html>
+module.exports = ({ player_id, name, year, category, department, college, auid, photo, email, gender, dob, type }) => {
+   const today = new Date();
+   return `<!doctype html>
 <html>
    <head>
       <meta charset="utf-8">
@@ -128,11 +128,6 @@ transform: rotate(60deg);
                         </tr>
                         <tr>
                         <td>
-                           <b>DOB:</b> ${dob}
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>
                            <b>APL ID:</b> APL-${player_id}
                         </td>
                         </tr>
@@ -165,7 +160,7 @@ transform: rotate(60deg);
                <td><b>Category: </b> <span style='font-weight:500'> ${category} </span></td>
             </tr>
             <tr class="item">
-               <td><b>Gender:</b>  <span style='font-weight:500'> ${gender} </span></td>
+               
                <td><b>FACULTY/STUDENT: </b> <span style='font-weight:500'> ${type} </span></td>
             </tr>
          </table>

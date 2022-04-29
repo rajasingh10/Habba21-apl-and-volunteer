@@ -30,6 +30,11 @@ body {
   color: #fff;
   margin-top: 4%;
 }
+.volunteer-register-left{
+  text-align: center;
+  color: #fff;
+  margin-top: 4%;
+}
 .register-left input{
   border: none;
   border-radius: 1.5rem;
@@ -42,6 +47,7 @@ body {
   margin-bottom: 3%;
   cursor: pointer;
 }
+
 .register-right{
   background: #dddedf;
   border-top-left-radius: 10% 50%;
@@ -49,6 +55,22 @@ body {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 
+}
+.register-left-logo{
+  width: 40%;
+  margin: auto;
+  -webkit-animation: mover 2s infinite  alternate;
+  animation: mover 1s infinite  alternate;
+}
+.volunteer-register-left img{
+ width: 100%;
+}
+.register-left-logo h4{
+  font-weight: 900;
+  
+  font-size: 25px;
+  font-family: 'Lobster', cursive;
+  letter-spacing:1.4px
 }
 .register-left img{
   margin-top: 15%;

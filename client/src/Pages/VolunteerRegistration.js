@@ -8,9 +8,9 @@ import LoadingSpinner from "../components/Spinner";
 
 
 export const VolunteerRegistration = () => {
-  const [state, setState] = useState({});  
+  const [state, setState] = useState({});
   const [Depts, setDepts] = useState([])
-const[loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
 
   const register = async (states) => {
     try {
@@ -56,8 +56,8 @@ const[loading,setLoading]=useState(false)
       console.log(error)
 
     }
-    finally{
-    setLoading(false)
+    finally {
+      setLoading(false)
 
     }
   }
@@ -67,7 +67,7 @@ const[loading,setLoading]=useState(false)
   const departments = (value) => {
 
     if (value == "AIT") {
-      return ["AE|Aeronutical Engineering", "CV|Civil Engineering", "AI/ML| Artificial Intelligence & Machine Learning Engg.", "AU|Automobile Engineering", "BT|BioTechnology Engineering",  "CSE|Computer Science Engineering",  "EEE|Electrical & Electronic Engineering", "ECE|Electronics & Communication Engineering", "ISE|Information Science & Engineering", "ME|Mechanical Engineering",  "MT|Mechatronics Engineering", "MBA|Master of Buisness Administration", "OTH|Others"];
+      return ["AE|Aeronutical Engineering", "CV|Civil Engineering", "AI/ML| Artificial Intelligence & Machine Learning Engg.", "AU|Automobile Engineering", "BT|BioTechnology Engineering", "CSE|Computer Science Engineering", "EEE|Electrical & Electronic Engineering", "ECE|Electronics & Communication Engineering", "ISE|Information Science & Engineering", "ME|Mechanical Engineering", "MT|Mechatronics Engineering", "MBA|Master of Buisness Administration", "OTH|Others"];
     } else if (value == "ANRVASA") {
       return ["Arch|Bachelor Of Architecture", "OTH|Others"];
     } else if (value == "ABMRCP") {
@@ -107,7 +107,7 @@ const[loading,setLoading]=useState(false)
       return ["BOP|Bachelor of Physiotheraphy", "OTH|Others"];
     }
     else if (value == "AIEFL") {
-      return [ "OTH|English Spanish German"];
+      return ["OTH|English Spanish German"];
     }
     else if (value == "") {
       return ["|"];
@@ -161,10 +161,14 @@ const[loading,setLoading]=useState(false)
                 className='form-control'
                 type="email"
                 required
+                pattern="^[A-Za-z0-9]+(.|_)+[A-Za-z0-9]+@+acharya.ac.in$"
                 placeholder="Email"
                 name="email"
                 onChange={e => { setState({ ...state, email: e.target.value }) }}
               />
+              <div style={{ fontSize: "10px" }}>
+                Email-ID provided by Acharya
+              </div>
             </div>
             <div class="form-group">
               <input
@@ -218,15 +222,15 @@ const[loading,setLoading]=useState(false)
                 {deptElement}
 
               </select>
-              
 
-</div>
 
-<div class="form-group">
+            </div>
+
+            <div class="form-group">
               <select placeholder="Preference1" class="form-control" required onChange={e => {
                 setState({ ...state, Tpreference1: e.target.value });
               }}>
-               <option selected disabled value="">
+                <option selected disabled value="">
                   Team preferences 1
                 </option>
                 <option value="Music">Music</option>
@@ -253,7 +257,7 @@ const[loading,setLoading]=useState(false)
               <select placeholder="Preference2" class="form-control" required onChange={e => {
                 setState({ ...state, Tpreference2: e.target.value });
               }}>
-               <option selected disabled value="">
+                <option selected disabled value="">
                   Team preferences 2
                 </option>
                 <option value="Music">Music</option>
@@ -364,7 +368,7 @@ const[loading,setLoading]=useState(false)
 
           </div>
           <div style={{ margin: "15px auto 0 auto" }}>
-            {loading?<LoadingSpinner/>:<button
+            {loading ? <LoadingSpinner /> : <button
               type="submit"
               style={{
                 background: "#0DABF1",
