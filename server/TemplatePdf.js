@@ -150,29 +150,21 @@ transform: rotate(60deg);
          </tr>
 
 
-            <tr class="item">
-                <td><b>AUID:</b> <span style='font-weight:500'> ${auid}</span></td>
-               <td><b>Year:</b>  <span style='font-weight:500'> ${year} </span></td>
-            </tr>
-            <tr class="item">
-                <td><b>Department:</b>  <span style='font-weight:500'> ${department} </span></td>
-             
-               <td><b>Category: </b> <span style='font-weight:500'> ${category} </span></td>
-            </tr>
-            <tr class="item">
-               
-               <td><b>FACULTY/STUDENT: </b> <span style='font-weight:500'> ${type} </span></td>
-            </tr>
+           <tr class="item">
+         <td><b>${type === "Faculty" ? "EMPID" : "AUID"}:</b> <span style='font-weight:500'> ${auid}</span></td>
+        <td><b>Year:</b>  <span style='font-weight:500'> ${type === "Faculty" ? "2022" : year} </span></td>
+     </tr>
+     <tr class="item">
+         <td><b>Department:</b>  <span style='font-weight:500'> ${department} </span></td>
+      
+        <td><b>Category: </b> <span style='font-weight:500'> ${category} </span></td>
+     </tr>
+     <tr class="item">
+        
+        <td><b>FACULTY/STUDENT: </b> <span style='font-weight:500'> ${type} </span></td>
+     </tr>
          </table>
-         <h5 class="">Proctor's Signature: </h4>
-         <h5 class="">HOD's Signature: </h4><br />
-         <p >
-         1) Every player(student) must get this player application form signed from his department HOD/Proctor/Principal/Dean and will submit the same in CPRD reception before the last date of application form closing.<br/>
-2) Those students who have submitted the application form will undergo tryouts by the organising committee in the stadium. Owners of all the teams will be present during this process.<br/>
-3)Only players who have participated in tryouts are eligible for the auction and to take part in APL Season-7.<br/>
-4)Year Back Students are not allowed to participate </br>
-         </p>
-    
+        
       </div>
       
  
